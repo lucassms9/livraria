@@ -32,21 +32,12 @@ class EnviarEmail implements ShouldQueue
      */
     public function handle()
     {
-        // $usuario = Usuario::find(1);
 
-        // $user = $this->usuario;
-        // $user->email = 'lucassms9@hotmail.com';   // This is the email you want to send to.
-        // $user->notify(new ConfirmaCadastro());
-
-
-        // ConfirmaCadastro::send(new ConfirmaCadastro());
-      
         $user = new Usuario();
         $user->dados = $this->usuario;
-        $user->email = $this->usuario['email'];   // This is the email you want to send to.
+        $user->email = $this->usuario['email'];   
         $user->notify(new ConfirmaCadastro());
 
-        // echo 'email sent';
     }
 
    
