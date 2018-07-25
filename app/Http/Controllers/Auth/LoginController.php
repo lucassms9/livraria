@@ -50,8 +50,6 @@ class LoginController extends Controller
         ])->first();
         
         if($usuario){
-            Session::set('Usuario', $usuario);
-
             return redirect('livros/');
 
         }else{
