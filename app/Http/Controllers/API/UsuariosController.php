@@ -27,15 +27,6 @@ class UsuariosController extends Controller
 		
 	}
 
-
-	// public function register(Request $request)
-	// {
-	// 	$this->validator($request->all())->validate();
-	// 	event(new Registered($user = $this->create($request->all())));
-	
-	// 	return view('verification');
-	// }
-
 	public function verify($token)
 	{
 		$user = Usuario::where('email_token', $token)->first();
@@ -44,8 +35,6 @@ class UsuariosController extends Controller
 			// return view('emailconfirm', ['user' => $user]);
 			return 'user ativado com sucesso';
 	}
-
-
 
 	public function store(Request  $request)
 	{
@@ -58,15 +47,11 @@ class UsuariosController extends Controller
 			$dataForm['ativo'] = 0;
 			$dataForm['email_token'] = base64_encode($dataForm['email']);
 			$insert = $this->usuario->create($dataForm);
-
-			
 			if($insert){
 
 				dispatch(new EnviarEmail($insert));
 				EnviarEmail::dispatch($insert)
 					->delay(now()->addMinutes(1));
-
-
 				$retorno = 'usuario cadastrado com sucesso';
 			}else{
 
@@ -74,8 +59,6 @@ class UsuariosController extends Controller
 			}
 
 			echo json_encode($retorno);
-
-
 
 		} 
 

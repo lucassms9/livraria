@@ -41,41 +41,22 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-
-    public function authenticate(Request $request)
-    {
-        
-    }
-
-
     public function credenciais(Request $request)
     {
 
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
+        $usuario = Usuario::where([
+            'email' => $request['email'] ,
+            'senha' => md5($request['senha'])
+        ])->first();
+        
+        if($usuario){
+            Session::set('Usuario', $usuario);
 
             return redirect('livros/');
 
+        }else{
+            return redirect('login/');
         }
-
-
-     
-        // $usuario = Usuario::where([
-        //     'email' => $request['email'] ,
-        //     'senha' => md5($request['senha'])
-        // ])->first();
-        
-        // if($usuario){
-        //     // Session::set('Usuario', $usuario);
-
-        //     $request->session()->put('Usuario', $usuario);
-
-           
-        // }else{
-        //     return redirect('login/');
-        // }
 
         
     }

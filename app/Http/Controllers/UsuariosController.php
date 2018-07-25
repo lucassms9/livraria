@@ -50,19 +50,12 @@ class UsuariosController extends Controller
         $user->dados = $usuario;
         $user->email = $usuario['email'];   // This is the email you want to send to.
         $user->notify(new ConfirmaCadastro());
-
-
         if($user)
         return 'enviado com sucesso';
         else
         return 'erro no envio';
 
-
-
-
-
     }
-
 
     public function ativarConta($usuario_id)
     {
@@ -78,19 +71,9 @@ class UsuariosController extends Controller
         else
             return 'erro ao ativar usuario';
 
-
-
-
-
     }
 
 
-    
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //

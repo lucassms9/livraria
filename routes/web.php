@@ -12,19 +12,7 @@
 */
 
 
-
-use App\Models\Usuario;
-use App\Notifications\ConfirmaCadastro;
-
 Route::get('/', 'Auth\LoginController@login')->name('login');
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-
 
 
 Route::group([] , function () {
